@@ -1,9 +1,13 @@
 body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 24px;
     display: flex;
     flex: 1, 0, auto;
     align-items: center;
     justify-content: center;
     /* max-width: 90vw;
     max-height: auto; */
-    margin: 10vw;
+    margin: 10%vw;
+    background-color: #13293D;
+    color: #DFEDF6;
 }

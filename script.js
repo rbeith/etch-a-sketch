@@ -4,23 +4,40 @@ const container = document.querySelector('.container');
 container.style.display = 'flex';
 container.style.flex = '1, 0, auto'
 container.style.flexDirection = 'column';
-container.style.height = '600px';
-container.style.width = '600px';
+container.style.height = '900px';
+container.style.width = '800px';
 container.style.justifyContent = 'flex-start';
 container.style.alignItems = 'center'
 
-const button = document.createElement('button');
-container.appendChild(button);
-button.textContent = 'Reset';
-button.style.margin = '24px'
+const title = document.createElement('h1');
+container.appendChild(title);
+title.textContent = 'Sketch Box'
+title.style.fontStyle = 'italic'
+title.display = 'flex';
+title.flex = '1';
+title.style.color = '#90BCDF'
+
+const textBox = document.createElement('div');
+container.appendChild(textBox);
+textBox.textContent = 'Click \"New Canvas\" to reset or choose a new canvas size. Choose up to 100 pixels for the width and height of the new canvas.'
+textBox.display = 'flex';
+textBox.flex = '1';
+textBox.style.padding = '10px'
+textBox.style.width = '600px'
+textBox.style.alignItems = 'center'
 
 const gridBox = document.createElement('gridBox');
 container.appendChild(gridBox);
 gridBox.style.display = 'flex';
 gridBox.style.flexDirection = 'column';
 gridBox.style.flex = '1, 0, auto';
-gridBox.style.height = '500px';
-gridBox.style.width = '500px';
+gridBox.style.height = '600px';
+gridBox.style.width = '600px';
+gridBox.style.borderStyle = 'solid'
+gridBox.style.borderWidth = '3px'
+gridBox.style.borderColor = '#2A628F'
+gridBox.style.padding = '2px'
+gridBox.style.margin = '10px'
 
 grid(); 
 function grid(size = 16) {
@@ -53,39 +70,42 @@ function grid(size = 16) {
 function draw () {
     let pixels = document.querySelectorAll('.pixel');
     pixels.forEach((pixel) => {
-        pixel.addEventListener('pointerover', () => {
-            pixel.style.backgroundColor = 'white'
+        pixel.addEventListener('mouseover', () => {
+            pixel.style.backgroundColor = '#'+(Math.random().toString(16)+'00000').slice(2,8)
         })
     });
 };
 draw();
 
-// pixels.forEach((pixel) => {
-//     button.addEventListener('click', () => {   
-//         pixel.style.backgroundColor = 'black'
-//     })
-// });
-
-// function remove() {
-//     gridBox.removeChild(gridBox.firstChild);
-//     };
-
-
+const button = document.createElement('button');
+container.appendChild(button);
+button.textContent = 'New Canvas';
+button.style.margin = '24px'
+button.style.fontWeight = '700';
+button.style.paddingTop = '.5em'
+button.style.paddingBottom = '.5em'
+button.style.paddingLeft = '1em'
+button.style.paddingRight = '1em'
+button.style.borderRadius = '8px'
+button.style.backgroundColor = '#3E92CC'
+button.style.borderStyle = 'none'
+// button.style.borderColor = '#2A628F'
+button.style.fontSize = '16px'
+button.style.color = '#DFEDF6'
+button.style.textShadow = '1px 1px 0 #500'
 
 button.addEventListener('click', () => {
-    let pixels = document.querySelectorAll('.pixel')
-    pixels.forEach((pixel) => {   
-        pixel.style.backgroundColor = 'black'
-    })
+    gridBox.style.backgroundColor = 'black';
     while (gridBox.firstChild) {
         gridBox.removeChild(gridBox.lastChild);}
-    let newSize = prompt('New grid size?')
+    let newSize = prompt('How many pixels wide do you want your grid?')
     console.log(newSize)
-        if (newSize <= 100) {
-            grid(newSize)
-        } else if (newSize.length == 0 || newSize == null) {
-            grid();
-        }
-        draw();
+    console.log(typeof newSize)
+    if (newSize != null && newSize <= 100 && newSize >0) {
+        grid(newSize)
+    } else {
+        grid();
+    }
+    draw();
 });  
 
