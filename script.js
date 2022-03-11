@@ -50,28 +50,42 @@ function grid(size = 16) {
     };
 };
 
- 
+function draw () {
+    let pixels = document.querySelectorAll('.pixel');
+    pixels.forEach((pixel) => {
+        pixel.addEventListener('pointerover', () => {
+            pixel.style.backgroundColor = 'white'
+        })
+    });
+};
+draw();
 
-let pixels = document.querySelectorAll('.pixel');
+// pixels.forEach((pixel) => {
+//     button.addEventListener('click', () => {   
+//         pixel.style.backgroundColor = 'black'
+//     })
+// });
 
-pixels.forEach((pixel) => {
-    pixel.addEventListener('pointerover', () => {
-        pixel.style.backgroundColor = 'white'
-    })
-});
+// function remove() {
+//     gridBox.removeChild(gridBox.firstChild);
+//     };
 
-pixels.forEach((pixel) => {
-    button.addEventListener('click', () => {   
-        pixel.style.backgroundColor = 'black'
-    })
-});
+
 
 button.addEventListener('click', () => {
-    grid(0)
-    console.log(grid(0))
+    let pixels = document.querySelectorAll('.pixel')
+    pixels.forEach((pixel) => {   
+        pixel.style.backgroundColor = 'black'
+    })
+    while (gridBox.firstChild) {
+        gridBox.removeChild(gridBox.lastChild);}
     let newSize = prompt('New grid size?')
     console.log(newSize)
-        if (newSize != null && newSize < 100) {
-        grid(newSize)} 
+        if (newSize <= 100) {
+            grid(newSize)
+        } else if (newSize.length == 0 || newSize == null) {
+            grid();
+        }
+        draw();
 });  
 
